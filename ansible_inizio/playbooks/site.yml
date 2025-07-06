@@ -1,11 +1,13 @@
-- hosts: webservers
+- hosts: all
   become: yes
+  vars_files:
+    - /home/admin/inizio_test/ansible_inizio/group_vars/all.yml
   roles:
     - user
     - common
     - nginx
     - firewall
-    - security
+    - fail2ban
 
   tasks:
     - name: Validate HTTP service is running
