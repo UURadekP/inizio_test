@@ -1,0 +1,11 @@
+﻿server {
+    listen {{ nginx_port }};
+    server_name localhost;
+
+    root {{ web_root }};
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}

@@ -1,0 +1,6 @@
+web_user: webapp
+web_root: /opt/static-sites
+nginx_port: 80
+firewall_allowed_ports:
+  - 22
+  - 80

@@ -1,0 +1,21 @@
+﻿- name: Install ufw
+  apt:
+    name: ufw
+    state: present
+    update_cache: yes
+
+- name: Allow ports from list
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+  loop: "{{ firewall_allowed_ports }}"
+
+- name: Set default ufw incoming policy to deny
+  ufw:
+    state: enabled
+    direction: incoming
+    policy: deny
+
+- name: Enable ufw
+  ufw:
+    state: enabled

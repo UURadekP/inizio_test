@@ -1,0 +1,50 @@
+﻿- name: Install fail2ban
+  apt:
+    name: fail2ban
+    state: present
+    update_cache: yes
+
+- name: Ensure fail2ban service is running and enabled
+  service:
+    name: fail2ban
+    state: started
+    enabled: yes
+
+- name: Harden SSH - deploy custom sshd_config
+  template:
+    src: sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: 0644
+  notify: Restart sshd
+
+- name: Disable root login and password authentication
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^PermitRootLogin'
+    line: 'PermitRootLogin no'
+    backup: yes
+
+  when: false  # ignore, handled by template
+
+- name: Disable password auth for SSH (only key allowed)
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^PasswordAuthentication'
+    line: 'PasswordAuthentication no'
+    backup: yes
+
+  when: false  # ignore, handled by template
+
+- name: Ensure SSH service is restarted
+  service:
+    name: ssh
+    state: restarted
+  when: false  # handled by handler
+
+handlers:
+  - name: Restart sshd
+    service:
+      name: ssh
+      state: restarted

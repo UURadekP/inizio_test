@@ -1,0 +1,14 @@
+- name: Create webapp user
+  user:
+    name: "{{ web_user }}"
+    shell: /bin/bash
+    create_home: yes
+    state: present
+
+- name: Create web root directory
+  file:
+    path: "{{ web_root }}"
+    state: directory
+    owner: "{{ web_user }}"
+    group: "{{ web_user }}"
+    mode: "0755"

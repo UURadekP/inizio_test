@@ -1,0 +1,20 @@
+- hosts: webservers
+  become: yes
+  roles:
+    - user
+    - common
+    - nginx
+    - firewall
+    - security
+
+  tasks:
+    - name: Validate HTTP service is running
+      uri:
+        url: "http://localhost:{{ nginx_port }}/"
+        return_content: yes
+      register: http_response
+
+    - name: Check if web page contains correct content
+      assert:
+        that:
+          - "'Welcome to the website' in http_response.content"
