@@ -9,13 +9,21 @@
     path: /etc/nginx/sites-enabled/default
     state: absent
 
-- name: Deploy custom nginx config
+- name: Deploy nginx.conf
   template:
     src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Deploy webapp site config
+  template:
+    src: webapp.conf.j2
     dest: /etc/nginx/sites-available/webapp.conf
-    owner: webapp
-    group: webapp
-    mode: 0644
+    owner: root
+    group: root
+    mode: "0644"
 
 - name: Create symlink
   file:
