@@ -1,4 +1,4 @@
-Vytvořeno za účelem reakce na pracovní příležitost ve sploečnosti inizio
+Vytvořeno za účelem reakce na pracovní příležitost ve společnosti inizio
 
 Default user je nastaven "admin", pokud se Váš user liší, změnte ho v hosts.ini.
 
