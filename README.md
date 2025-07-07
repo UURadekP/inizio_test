@@ -1,7 +1,8 @@
 Vytvořeno za účelem reakce na pracovní příležitost ve společnosti inizio
 
-Default user je nastaven "admin", pokud se Váš user liší, změnte ho v hosts.ini.
+For english version scroll down.
 
+Default user je nastaven "admin", pokud se Váš user liší, změnte ho v hosts.ini.
 
 Postup:
 1. sudo apt install openssh-server
@@ -32,3 +33,36 @@ Co playbook dělá:
 17. Vypne heslovou authentikaci při použití SSH klíče.
 18. Kontrola, zda li server běží.
 19. Kontrola skrze uri modul.
+
+___________________________ ENGLISH BELOW ___________________________
+
+Procedure:
+1. sudo apt install openssh-server
+2. Add an SSH key — if you already have your own, simply add it to the authorized_keys. If possible, use an RSA key with the default name. The key should be in ~/.ssh/id_rsa.pub.
+3. sudo apt install ansible
+4. git clone git@github.com:UURadekP/inizio_test.git — Clone it into /home/<username>/
+5. cd inizio_server/ansible_inizio/
+6. ansible-playbook -i inventory/hosts.ini playbooks/site.yml -K
+ 
+After the playbook finishes, SSH access should work with ssh webapp@<your VM's IP address>
+
+What the playbook does:
+1. Creates the user "webapp"
+2. Creates the web root directory
+3. Creates the SSH directory for the "webapp" user and copies your SSH key into authorized_keys
+4. Installs or verifies unattended-upgrades, then enables it
+5. Updates the package cache and upgrades all packages
+6. Installs Nginx
+7. Removes the default Nginx configuration
+8. Deploys a custom Nginx configuration
+9. Downloads index.html.j2 from the Git repository https://github.com/UURadekP/inizio_webpattern
+10. Creates index.html using the template function and saves it to the web root. If index.html has changed, it reloads Nginx
+11. Verifies Nginx is working
+12. Installs UFW (firewall)
+13. Adds ports 22 and 80 to the allow list
+14. Changes the default UFW policy to deny
+15. Installs Fail2Ban
+16. Deploys a custom sshd_config
+17. Disables password authentication when using an SSH key
+18. Checks that the server is running
+19. Performs a check using the uri module
