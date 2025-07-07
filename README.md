@@ -5,7 +5,7 @@ Default user je nastaven "admin", pokud se Váš user liší, změnte ho v hosts
 
 Postup:
 1. sudo apt install openssh-server
-2. Přidejte ssh klíč, pokud již máte svůj stačí ho přidat do authorized keys. Pokud možno tak použijte rsa klíč s default jménem.
+2. Přidejte ssh klíč, pokud již máte svůj stačí ho přidat do authorized keys. Pokud možno tak použijte rsa klíč s default jménem. Klíč by měl být v ~/.ssh./id_rsa.pub 
 3. sudo apt install ansible
 4. git clone git@github.com:UURadekP/inizio_test.git. Naklonovat do /home/<username>
 5. cd inizio_server/ansible_inizio/
