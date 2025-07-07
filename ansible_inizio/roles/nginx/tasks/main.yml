@@ -31,14 +31,20 @@
     dest: /etc/nginx/sites-enabled/webapp.conf
     state: link
 
-- name: Upload custom index.html
+- name: Get index.html from git (bonus point)
+  get_url:
+    url: "https://github.com/UURadekP/inizio_webpattern/blob/6bd68ce12099c3e62b9d3be765501ba971dfa140/index.html.j2"
+    dest: "/tmp/index.html.j2"
+    mode: "0644"
+  become: yes
+
+- name: Generate index.html from downloaded j2 template
   template:
-    src: index.html.j2
-    dest: "{{ web_root }}/index.html"
+    src: "/tmp/index.html.j2"
+    dest: "/opt/static-sites/index.html"
+    mode: "0644"
     owner: "{{ web_user }}"
     group: "{{ web_user }}"
-    mode: 0644
-  notify: Reload nginx
 
 - name: nginx process check
   service:
