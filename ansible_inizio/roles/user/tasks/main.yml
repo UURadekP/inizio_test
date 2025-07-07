@@ -12,3 +12,18 @@
     owner: "{{ web_user }}"
     group: "{{ web_user }}"
     mode: "0755"
+
+- name: Create ssh dir
+  file:
+    path: /home/webapp/.ssh
+    state: directory
+    owner: "{{ web_user }}"
+    group: "{{ web_user }}"
+    mode: 0700
+
+- name: Add ssh key into auth file
+  authorized_key:
+    user: "{{ web_user }}"
+    state: present
+    key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+
