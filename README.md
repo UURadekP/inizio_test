@@ -9,7 +9,7 @@ Postup:
 2. Přidejte ssh klíč, pokud již máte svůj stačí ho přidat do authorized keys. Pokud možno tak použijte rsa klíč s default jménem. Klíč by měl být v ~/.ssh./id_rsa.pub 
 3. sudo apt install ansible
 4. git clone git@github.com:UURadekP/inizio_test.git. Naklonovat do /home/<username>
-5. cd inizio_server/ansible_inizio/
+5. cd inizio_test/ansible_inizio/
 6. ansible-playbook -i inventory/hosts.ini playbooks/site.yml -K
 7. Po skončení playbooku by mělo fungovat ssh webapp@<ip adresa vaši VM>
 
@@ -41,7 +41,7 @@ Procedure:
 2. Add an SSH key — if you already have your own, simply add it to the authorized_keys. If possible, use an RSA key with the default name. The key should be in ~/.ssh/id_rsa.pub.
 3. sudo apt install ansible
 4. git clone git@github.com:UURadekP/inizio_test.git — Clone it into /home/<username>/
-5. cd inizio_server/ansible_inizio/
+5. cd inizio_test/ansible_inizio/
 6. ansible-playbook -i inventory/hosts.ini playbooks/site.yml -K
  
 After the playbook finishes, SSH access should work with ssh webapp@<your VM's IP address>
