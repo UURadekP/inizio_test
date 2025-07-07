@@ -47,6 +47,9 @@
     group: "{{ web_user }}"
   notify: Reload nginx
 
+- name: Run handlers if needed.
+  meta: flush_handlers
+
 - name: nginx process check
   service:
     name: nginx
