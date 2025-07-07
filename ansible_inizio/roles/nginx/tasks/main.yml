@@ -33,7 +33,7 @@
 
 - name: Get index.html from git (bonus point)
   get_url:
-    url: "https://github.com/UURadekP/inizio_webpattern.git"
+    url: "https://raw.githubusercontent.com/UURadekP/inizio_webpattern/main/index.html"
     dest: "/tmp/index.html.j2"
     mode: "0644"
   become: yes
